@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nexter — Register</title>
+
+  <!-- Same fonts as login page — keeps design consistent -->
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet"/>
+
+  <!-- Shared stylesheet — same file used by login.html -->
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       PAGE WRAPPER — identical two-column structure to login.html
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="page-wrapper">
+
+    <!-- ─────────────────────────────────────────────────────
+         LEFT PANEL — same gradient design, different text
+    ───────────────────────────────────────────────────────── -->
+    <div class="left-panel left-panel--register">
+      <div class="deco-circle c1"></div>
+      <div class="deco-circle c2"></div>
+      <div class="deco-circle c3"></div>
+
+      <div class="left-inner">
+
+        <!-- Register page illustration — person joining a group -->
+        <div class="illustration" aria-hidden="true">
+          <svg viewBox="0 0 340 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Large circle background -->
+            <circle cx="170" cy="110" r="80" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.28)" stroke-width="2"/>
+            <!-- Person centre (new user) -->
+            <circle cx="170" cy="82"  r="22" fill="rgba(255,255,255,0.55)"/>
+            <rect   x="148" y="106"  width="44" height="48" rx="14" fill="rgba(255,255,255,0.42)"/>
+            <!-- Left arm -->
+            <rect   x="133" y="112"  width="18" height="36" rx="9"  fill="rgba(255,255,255,0.32)"/>
+            <!-- Right arm -->
+            <rect   x="189" y="112"  width="18" height="36" rx="9"  fill="rgba(255,255,255,0.32)"/>
+            <!-- Person left (existing member) -->
+            <circle cx="96"  cy="95"  r="15" fill="rgba(255,255,255,0.42)"/>
+            <rect   x="81"   y="112"  width="30" height="38" rx="10" fill="rgba(255,255,255,0.32)"/>
+            <!-- Person right (existing member) -->
+            <circle cx="244" cy="95"  r="15" fill="rgba(255,255,255,0.42)"/>
+            <rect   x="229"  y="112"  width="30" height="38" rx="10" fill="rgba(255,255,255,0.32)"/>
+            <!-- Connection lines between people -->
+            <line x1="111" y1="103" x2="148" y2="100" stroke="rgba(255,255,255,0.45)" stroke-width="2" stroke-dasharray="4 3"/>
+            <line x1="229" y1="103" x2="192" y2="100" stroke="rgba(255,255,255,0.45)" stroke-width="2" stroke-dasharray="4 3"/>
+            <!-- Star / sparkle above new user -->
+            <path d="M170 42 l3 8 l8 0 l-6 5 l2 8 l-7-5 l-7 5 l2-8 l-6-5 l8 0 z" fill="rgba(255,255,255,0.75)"/>
+            <!-- Decorative dots scattered -->
+            <circle cx="120" cy="68"  r="4" fill="rgba(255,255,255,0.30)"/>
+            <circle cx="220" cy="68"  r="4" fill="rgba(255,255,255,0.30)"/>
+            <circle cx="80"  cy="160" r="3" fill="rgba(255,255,255,0.22)"/>
+            <circle cx="260" cy="155" r="3" fill="rgba(255,255,255,0.22)"/>
+            <!-- Plus icon (register action symbol) -->
+            <rect x="152" y="196" width="36" height="6" rx="3" fill="rgba(255,255,255,0.60)"/>
+            <rect x="167" y="181" width="6"  height="36" rx="3" fill="rgba(255,255,255,0.60)"/>
+          </svg>
+        </div>
+
+        <h2 class="panel-title">Join the Community</h2>
+        <p class="panel-tagline">
+          Create your account and start collaborating<br/>
+          with people who <em>inspire</em> you every day.
+        </p>
+
+        <div class="panel-dots" aria-hidden="true">
+          <span class="dot dot-wide"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+      </div>
+    </div><!-- end .left-panel -->
+
+
+    <!-- ─────────────────────────────────────────────────────
+         RIGHT PANEL — registration card
+    ───────────────────────────────────────────────────────── -->
+    <div class="right-panel">
+      <div class="dot-grid" aria-hidden="true"></div>
+
+      <div class="auth-card auth-card--register" id="registerCard">
+
+        <h1 class="card-title">Create Account</h1>
+        <p class="card-sub">Fill in the details below to get started with Nexter.</p>
+
+        <!-- ───────────────────────────────────────────────
+             REGISTRATION FORM
+             id="registerForm" → auth.js attaches submit listener
+        ─────────────────────────────────────────────────── -->
+        <form id="registerForm" novalidate>
+
+          <!-- Name field -->
+          <div class="field-group">
+            <label for="regName" class="sr-only">Full Name</label>
+            <div class="field-wrap">
+              <!-- Person icon -->
+              <svg class="field-icon" viewBox="0 0 20 20" fill="none">
+                <circle cx="10" cy="7" r="4" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M2 18c0-4 3.6-7 8-7s8 3 8 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+              <input type="text" id="regName" class="field-input" placeholder="Full Name" autocomplete="name" required/>
+            </div>
+            <span class="field-err" id="regNameErr"></span>
+          </div>
+
+          <!-- Gender dropdown -->
+          <div class="field-group">
+            <label for="regGender" class="sr-only">Gender</label>
+            <div class="field-wrap field-wrap--select">
+              <!-- Gender icon -->
+              <svg class="field-icon" viewBox="0 0 20 20" fill="none">
+                <circle cx="10" cy="8" r="5" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M10 13v5M7 16h6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+              <!-- Gender select dropdown — MODIFY: add more options here -->
+              <select id="regGender" class="field-input field-select" required>
+                <option value="" disabled selected>Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+              <!-- Custom chevron arrow for the select box -->
+              <svg class="select-arrow" viewBox="0 0 20 20" fill="none" aria-hidden="true">
+                <path d="M5 8l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <span class="field-err" id="regGenderErr"></span>
+          </div>
+
+          <!-- Email field -->
+          <div class="field-group">
+            <label for="regEmail" class="sr-only">Email</label>
+            <div class="field-wrap">
+              <svg class="field-icon" viewBox="0 0 20 20" fill="none">
+                <rect x="2" y="4" width="16" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M2 7l8 5 8-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+              <input type="email" id="regEmail" class="field-input" placeholder="E-mail" autocomplete="email" required/>
+            </div>
+            <span class="field-err" id="regEmailErr"></span>
+          </div>
+
+          <!-- Password field -->
+          <div class="field-group">
+            <label for="regPassword" class="sr-only">Password</label>
+            <div class="field-wrap">
+              <svg class="field-icon" viewBox="0 0 20 20" fill="none">
+                <rect x="5" y="9" width="10" height="8" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M7 9V6a3 3 0 016 0v3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+              <input type="password" id="regPassword" class="field-input" placeholder="Password (min 6 chars)" autocomplete="new-password" required/>
+              <button type="button" class="eye-btn" id="regEyeBtn" aria-label="Toggle password visibility">
+                <svg id="regEyeIcon" viewBox="0 0 20 20" fill="none">
+                  <path d="M1 10s3.5-6 9-6 9 6 9 6-3.5 6-9 6-9-6-9-6z" stroke="currentColor" stroke-width="1.5"/>
+                  <circle cx="10" cy="10" r="2.5" stroke="currentColor" stroke-width="1.5"/>
+                </svg>
+              </button>
+            </div>
+            <span class="field-err" id="regPasswordErr"></span>
+          </div>
+
+          <!-- REGISTER button -->
+          <button type="submit" class="btn-primary" id="registerBtn">
+            <span class="btn-label">REGISTER</span>
+            <span class="btn-spin" aria-hidden="true"></span>
+          </button>
+
+        </form>
+
+        <!-- Link back to login -->
+        <div class="switch-auth">
+          <span class="switch-text">Already have an account?</span>
+          <a href="login.html" class="switch-link">Sign In</a>
+        </div>
+
+        <!-- Status box for success/error messages -->
+        <div class="status-box" id="registerStatus" role="alert" aria-live="polite"></div>
+
+      </div><!-- end .auth-card -->
+    </div><!-- end .right-panel -->
+
+  </div><!-- end .page-wrapper -->
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       FIREBASE (ES Module)
+       Same pattern as login.html — initialise Firebase, then
+       bridge createUserWithEmailAndPassword to window so auth.js
+       (a classic script) can call it.
+  ═══════════════════════════════════════════════════════════ -->
+  <script type="module">
+    import { initializeApp }
+      from 'https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js';
+    import { getAuth, createUserWithEmailAndPassword }
+      from 'https://www.gstatic.com/firebasejs/12.10.0/firebase-auth.js';
+
+    const firebaseConfig = {
+      apiKey:            'AIzaSyCa2zi8UvarrzQ2ArVQjADHAvM8ERXC37Y',
+      authDomain:        'login-page-3d9b7.firebaseapp.com',
+      projectId:         'login-page-3d9b7',
+      storageBucket:     'login-page-3d9b7.firebasestorage.app',
+      messagingSenderId: '240817554149',
+      appId:             '1:240817554149:web:e32a140acd55e1c5e1ca0c'
+    };
+
+    const app  = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    /* Bridge — allows auth.js to call Firebase registration */
+    window.firebaseRegister = (email, pw) =>
+      createUserWithEmailAndPassword(auth, email, pw);
+  </script>
+
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+  <!-- Shared auth logic -->
+  <script src="auth.js"></script>
+</body>
+</html>

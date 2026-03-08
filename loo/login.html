@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Nexter — Sign In</title>
+
+  <!-- Google Fonts: DM Sans for body, Fraunces for display headings -->
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:ital,wght@0,700;0,800;1,700&display=swap" rel="stylesheet"/>
+
+  <!-- Shared stylesheet for both pages -->
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       PAGE WRAPPER
+       Two-column flex layout.
+       Left = gradient panel | Right = login card
+       On mobile these stack vertically (see style.css @media)
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="page-wrapper">
+
+    <!-- ─────────────────────────────────────────────────────
+         LEFT PANEL — gradient side with illustration & text
+    ───────────────────────────────────────────────────────── -->
+    <div class="left-panel">
+      <!-- Decorative blurred circles (pure CSS, no images needed) -->
+      <div class="deco-circle c1"></div>
+      <div class="deco-circle c2"></div>
+      <div class="deco-circle c3"></div>
+
+      <div class="left-inner">
+
+        <!-- SVG Illustration — represents "Group Discussions" -->
+        <!-- REPLACE: swap this <div class="illustration"> block with
+             <img src="your-image.png" class="illustration" alt="..."/>
+             if you have a real image file -->
+        <div class="illustration" aria-hidden="true">
+          <svg viewBox="0 0 340 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Monitor -->
+            <rect x="50" y="18" width="200" height="132" rx="12" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.45)" stroke-width="2"/>
+            <rect x="62" y="30" width="176" height="108" rx="7" fill="rgba(255,255,255,0.10)"/>
+            <!-- Screen content lines -->
+            <rect x="76" y="46" width="88" height="9" rx="4" fill="rgba(255,255,255,0.55)"/>
+            <rect x="76" y="63" width="60" height="7" rx="3" fill="rgba(255,255,255,0.35)"/>
+            <rect x="76" y="78" width="74" height="7" rx="3" fill="rgba(255,255,255,0.30)"/>
+            <rect x="76" y="93" width="48" height="7" rx="3" fill="rgba(255,255,255,0.22)"/>
+            <!-- Gear icon -->
+            <circle cx="206" cy="62" r="16" fill="rgba(255,255,255,0.20)" stroke="rgba(255,255,255,0.5)" stroke-width="2"/>
+            <circle cx="206" cy="62" r="6"  fill="rgba(255,255,255,0.45)"/>
+            <!-- Monitor stand -->
+            <rect x="135" y="150" width="30" height="14" rx="4" fill="rgba(255,255,255,0.28)"/>
+            <rect x="118" y="163" width="64" height="9"  rx="4" fill="rgba(255,255,255,0.22)"/>
+            <!-- Person 1 -->
+            <circle cx="96"  cy="140" r="11" fill="rgba(255,255,255,0.58)"/>
+            <rect   x="87"  y="153"  width="18" height="30" rx="7" fill="rgba(255,255,255,0.42)"/>
+            <rect   x="80"  y="157"  width="11" height="22" rx="5" fill="rgba(255,255,255,0.32)"/>
+            <rect   x="103" y="157"  width="11" height="22" rx="5" fill="rgba(255,255,255,0.32)"/>
+            <!-- Person 2 -->
+            <circle cx="228" cy="145" r="10" fill="rgba(255,255,255,0.52)"/>
+            <rect   x="220" y="157"  width="16" height="26" rx="6" fill="rgba(255,255,255,0.38)"/>
+            <rect   x="213" y="161"  width="10" height="18" rx="5" fill="rgba(255,255,255,0.28)"/>
+            <rect   x="234" y="161"  width="10" height="18" rx="5" fill="rgba(255,255,255,0.28)"/>
+            <!-- Wrench -->
+            <rect x="230" y="128" width="5" height="22" rx="2.5" fill="rgba(255,255,255,0.70)" transform="rotate(-32 234 139)"/>
+            <circle cx="234" cy="125" r="5.5" fill="none" stroke="rgba(255,255,255,0.70)" stroke-width="2"/>
+            <!-- Envelope -->
+            <rect x="160" y="55" width="28" height="20" rx="3" fill="rgba(255,255,255,0.28)" stroke="rgba(255,255,255,0.50)" stroke-width="1.5"/>
+            <polyline points="160,55 174,68 188,55" stroke="rgba(255,255,255,0.60)" stroke-width="1.5" fill="none"/>
+            <!-- Bar chart (left) -->
+            <rect x="50" y="158" width="11" height="26" rx="2" fill="rgba(255,255,255,0.33)"/>
+            <rect x="65" y="165" width="11" height="19" rx="2" fill="rgba(255,255,255,0.24)"/>
+            <rect x="80" y="172" width="11" height="12" rx="2" fill="rgba(255,255,255,0.18)"/>
+          </svg>
+        </div>
+
+        <!-- Left panel title & tagline -->
+        <h2 class="panel-title">Group Discussions</h2>
+        <p class="panel-tagline">
+          Don't value the things you have in life.<br/>
+          But value <em>who</em> you have in your life.
+        </p>
+
+        <!-- Decorative dots -->
+        <div class="panel-dots" aria-hidden="true">
+          <span class="dot dot-wide"></span>
+          <span class="dot"></span>
+          <span class="dot"></span>
+        </div>
+      </div>
+    </div><!-- end .left-panel -->
+
+
+    <!-- ─────────────────────────────────────────────────────
+         RIGHT PANEL — login card
+    ───────────────────────────────────────────────────────── -->
+    <div class="right-panel">
+      <!-- Decorative dot grid (top-right corner) -->
+      <div class="dot-grid" aria-hidden="true"></div>
+
+      <!-- Login card box -->
+      <div class="auth-card" id="loginCard">
+
+        <h1 class="card-title">Nexter Login</h1>
+        <p class="card-sub">Start today and make a difference in the way you build websites.</p>
+
+        <!-- ───────────────────────────────────────────────
+             LOGIN FORM
+             id="loginForm" → auth.js attaches submit listener here
+             novalidate    → we do custom JS validation
+        ─────────────────────────────────────────────────── -->
+        <form id="loginForm" novalidate>
+
+          <!-- Email field -->
+          <div class="field-group">
+            <label for="loginEmail" class="sr-only">Email</label>
+            <div class="field-wrap">
+              <!-- Envelope icon -->
+              <svg class="field-icon" viewBox="0 0 20 20" fill="none">
+                <rect x="2" y="4" width="16" height="12" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M2 7l8 5 8-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+              <input type="email" id="loginEmail" class="field-input" placeholder="E-mail" autocomplete="email" required/>
+            </div>
+            <!-- Error message — shown by JS when field is invalid -->
+            <span class="field-err" id="loginEmailErr"></span>
+          </div>
+
+          <!-- Password field -->
+          <div class="field-group">
+            <label for="loginPassword" class="sr-only">Password</label>
+            <div class="field-wrap">
+              <!-- Lock icon -->
+              <svg class="field-icon" viewBox="0 0 20 20" fill="none">
+                <rect x="5" y="9" width="10" height="8" rx="2" stroke="currentColor" stroke-width="1.5"/>
+                <path d="M7 9V6a3 3 0 016 0v3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              </svg>
+              <input type="password" id="loginPassword" class="field-input" placeholder="Password" autocomplete="current-password" required/>
+              <!-- Show/hide password toggle -->
+              <button type="button" class="eye-btn" id="loginEyeBtn" aria-label="Toggle password visibility">
+                <svg id="loginEyeIcon" viewBox="0 0 20 20" fill="none">
+                  <path d="M1 10s3.5-6 9-6 9 6 9 6-3.5 6-9 6-9-6-9-6z" stroke="currentColor" stroke-width="1.5"/>
+                  <circle cx="10" cy="10" r="2.5" stroke="currentColor" stroke-width="1.5"/>
+                </svg>
+              </button>
+            </div>
+            <span class="field-err" id="loginPasswordErr"></span>
+          </div>
+
+          <!-- SIGN IN button -->
+          <button type="submit" class="btn-primary" id="loginBtn">
+            <span class="btn-label">SIGN IN</span>
+            <span class="btn-spin" aria-hidden="true"></span>
+          </button>
+
+        </form>
+
+        <!-- New user prompt + link to register.html -->
+        <div class="switch-auth">
+          <span class="switch-text">New user?</span>
+          <a href="register.html" class="switch-link">Register Now</a>
+        </div>
+
+        <!-- Status message (success / error) shown after submit -->
+        <div class="status-box" id="loginStatus" role="alert" aria-live="polite"></div>
+
+      </div><!-- end .auth-card -->
+    </div><!-- end .right-panel -->
+
+  </div><!-- end .page-wrapper -->
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       SUCCESS MODAL
+       Hidden by default (display:none in CSS).
+       auth.js shows this after a successful Firebase login
+       by adding the class "modal-open" to .modal-overlay.
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="modal-overlay" id="successModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-box">
+      <!-- Animated checkmark icon -->
+      <div class="modal-icon" aria-hidden="true">
+        <svg viewBox="0 0 60 60" fill="none">
+          <circle cx="30" cy="30" r="28" stroke="url(#mg)" stroke-width="3"/>
+          <polyline points="18,30 26,38 42,22" stroke="url(#mg)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+          <defs>
+            <linearGradient id="mg" x1="0" y1="0" x2="60" y2="60" gradientUnits="userSpaceOnUse">
+              <stop offset="0%" stop-color="#2563eb"/>
+              <stop offset="100%" stop-color="#10b981"/>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+      <h2 class="modal-title" id="modalTitle">ID Password is Correct</h2>
+      <p class="modal-msg">You have been successfully authenticated. Welcome back!</p>
+      <!-- Clicking this button closes the modal (handled by auth.js) -->
+      <button class="btn-primary modal-ok" id="modalOkBtn">Continue</button>
+    </div>
+  </div>
+
+
+  <!-- ═══════════════════════════════════════════════════════════
+       FIREBASE (ES Module) — initialised here so auth.js can use it
+       Firebase v9+ requires ES Modules. We load it here and bridge
+       the functions to window.* so auth.js (classic script) can call them.
+  ═══════════════════════════════════════════════════════════ -->
+  <script type="module">
+    import { initializeApp }
+      from 'https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js';
+    import { getAuth, signInWithEmailAndPassword }
+      from 'https://www.gstatic.com/firebasejs/12.10.0/firebase-auth.js';
+
+    /* Your Firebase project config — find it at:
+       Firebase Console → Project Settings → Your Apps */
+    const firebaseConfig = {
+      apiKey:            'AIzaSyCa2zi8UvarrzQ2ArVQjADHAvM8ERXC37Y',
+      authDomain:        'login-page-3d9b7.firebaseapp.com',
+      projectId:         'login-page-3d9b7',
+      storageBucket:     'login-page-3d9b7.firebasestorage.app',
+      messagingSenderId: '240817554149',
+      appId:             '1:240817554149:web:e32a140acd55e1c5e1ca0c'
+    };
+
+    const app  = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    /* Bridge to window so auth.js (non-module) can call Firebase */
+    window.firebaseSignIn = (email, pw) =>
+      signInWithEmailAndPassword(auth, email, pw);
+  </script>
+
+  <!-- EmailJS SDK — must load before auth.js -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+  <!-- Our shared auth logic -->
+  <script src="auth.js"></script>
+</body>
+</html>
