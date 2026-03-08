@@ -1,0 +1,803 @@
+/* ================================================================
+   NEXTER AUTH — style.css
+   Shared stylesheet for login.html and register.html
+
+   TABLE OF CONTENTS
+   ─────────────────────────────────────────────────────────────
+   1.  CSS Variables        — colours, fonts, shadows (edit here)
+   2.  Reset & Base
+   3.  Accessibility
+   4.  Page Wrapper         — two-column flex layout
+   5.  Left Panel           — gradient side
+   6.  Left Panel Modifiers — register page variant
+   7.  Left Panel Content   — illustration, title, tagline
+   8.  Right Panel          — white card side
+   9.  Dot Grid             — decorative corner pattern
+   10. Auth Card            — the form container box
+   11. Form Fields          — inputs, icons, errors
+   12. Select Dropdown      — custom gender select
+   13. Eye Toggle Button    — show/hide password
+   14. Primary Button       — SIGN IN / REGISTER
+   15. Switch Auth          — "New user? Register Now" row
+   16. Status Box           — success / error message strip
+   17. Success Modal        — popup shown on login success
+   18. Responsive — Tablet  — max 960px
+   19. Responsive — Mobile  — max 560px
+================================================================ */
+
+
+/* ================================================================
+   1. CSS VARIABLES
+   MODIFY: Change these to restyle the entire site in one place.
+================================================================ */
+:root {
+  /* Left panel gradient */
+  --g-from:       #1d4ed8;    /* deep blue */
+  --g-mid:        #06b6d4;    /* cyan */
+  --g-to:         #10b981;    /* emerald green */
+
+  /* Button / accent */
+  --accent:       #10b981;
+  --accent-dk:    #059669;
+  --accent-glow:  rgba(16,185,129,0.30);
+
+  /* Backgrounds */
+  --page-bg:      #f0f5fb;
+  --right-bg:     #f8fafd;
+  --card-bg:      #ffffff;
+  --input-bg:     #f1f6fb;
+  --input-border: #dde5ef;
+  --input-focus:  #2563eb;
+
+  /* Text */
+  --text-dark:    #0d1b2e;
+  --text-mid:     #4a5e72;
+  --text-muted:   #8fa3b8;
+  --text-white:   #ffffff;
+
+  /* Fonts */
+  --font-body:    'DM Sans', sans-serif;
+  --font-display: 'Fraunces', serif;
+
+  /* Radii */
+  --r-sm:  8px;
+  --r-md:  14px;
+  --r-lg:  22px;
+  --r-xl:  32px;
+
+  /* Shadows */
+  --card-shadow: 0 24px 64px rgba(13,27,46,0.11), 0 4px 18px rgba(13,27,46,0.06);
+  --focus-ring:  0 0 0 3.5px rgba(37,99,235,0.20);
+}
+
+
+/* ================================================================
+   2. RESET & BASE
+================================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--page-bg);
+  color: var(--text-dark);
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+img, svg { display: block; max-width: 100%; }
+a        { text-decoration: none; color: inherit; }
+button   { font-family: var(--font-body); cursor: pointer; border: none; background: none; }
+
+
+/* ================================================================
+   3. ACCESSIBILITY — screen-reader only label text
+================================================================ */
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+
+/* Keyboard focus ring for all interactive elements */
+:focus-visible {
+  outline: 2px solid var(--input-focus);
+  outline-offset: 3px;
+}
+:focus:not(:focus-visible) { outline: none; }
+
+
+/* ================================================================
+   4. PAGE WRAPPER — two-column flex layout
+   Left and right panels sit side by side.
+   On mobile they stack (see @media section).
+================================================================ */
+.page-wrapper {
+  display: flex;
+  min-height: 100vh;
+  width: 100%;
+}
+
+
+/* ================================================================
+   5. LEFT PANEL — gradient decorative side
+   flex: 1.05 makes it slightly wider than the right panel.
+================================================================ */
+.left-panel {
+  flex: 1.05;
+  background: linear-gradient(148deg, var(--g-from) 0%, var(--g-mid) 52%, var(--g-to) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 56px 44px;
+  position: relative;
+  overflow: hidden;    /* clips the decorative circles */
+}
+
+/* ── Decorative blurred background circles ── */
+/* These give the left panel a soft, layered depth effect */
+/* MODIFY: change size, colour (rgba values), and position */
+.deco-circle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+.c1 {
+  width: 380px; height: 380px;
+  background: rgba(255,255,255,0.07);
+  top: -110px; left: -90px;
+}
+.c2 {
+  width: 260px; height: 260px;
+  background: rgba(255,255,255,0.05);
+  bottom: -70px; right: -70px;
+}
+.c3 {
+  width: 170px; height: 170px;
+  background: rgba(255,255,255,0.055);
+  top: 42%; left: 62%;
+}
+
+
+/* ================================================================
+   6. LEFT PANEL MODIFIER — register page
+   Shifts the gradient angle slightly for visual variety between pages.
+   MODIFY: change the gradient direction or stop colours.
+================================================================ */
+.left-panel--register {
+  background: linear-gradient(155deg, var(--g-from) 0%, #0891b2 45%, var(--g-to) 100%);
+}
+
+
+/* ================================================================
+   7. LEFT PANEL CONTENT — illustration, title, tagline, dots
+================================================================ */
+.left-inner {
+  position: relative;
+  z-index: 1;    /* sits above decorative circles */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 360px;
+  width: 100%;
+}
+
+/* SVG illustration wrapper */
+.illustration {
+  width: 100%;
+  max-width: 300px;
+  margin-bottom: 28px;
+  /* Gentle float animation */
+  animation: floatUp 5.5s ease-in-out infinite;
+  filter: drop-shadow(0 10px 28px rgba(0,0,0,0.16));
+}
+
+@keyframes floatUp {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-13px); }
+}
+
+.panel-title {
+  font-family: var(--font-display);
+  font-size: clamp(19px, 2.4vw, 26px);
+  font-weight: 700;
+  color: var(--text-white);
+  letter-spacing: -0.2px;
+  margin-bottom: 12px;
+}
+
+.panel-tagline {
+  font-size: 13.5px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.76);
+  line-height: 1.78;
+  max-width: 250px;
+  margin: 0 auto;
+}
+
+/* Italic emphasis inside tagline */
+.panel-tagline em {
+  font-style: italic;
+  font-weight: 600;
+  color: rgba(255,255,255,0.95);
+}
+
+/* Three decorative dots at bottom of left panel */
+.panel-dots {
+  display: flex;
+  gap: 8px;
+  margin-top: 32px;
+  align-items: center;
+}
+
+.dot {
+  display: block;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.45);
+}
+
+/* The first dot is wider — "active indicator" look */
+.dot-wide {
+  width: 26px;
+  border-radius: 5px;
+  background: rgba(255,255,255,0.88);
+}
+
+
+/* ================================================================
+   8. RIGHT PANEL — white side containing the auth card
+================================================================ */
+.right-panel {
+  flex: 1;
+  background: var(--right-bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 56px 36px;
+  position: relative;
+  overflow: hidden;
+}
+
+
+/* ================================================================
+   9. DOT GRID — decorative pattern, top-right corner of right panel
+   Created with CSS background-image radial-gradient pattern.
+   MODIFY: change background-size to space dots differently.
+================================================================ */
+.dot-grid {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 120px;
+  height: 120px;
+  background-image: radial-gradient(circle, #c4d4e8 1.3px, transparent 1.3px);
+  background-size: 15px 15px;
+  opacity: 0.65;
+  pointer-events: none;
+  z-index: 0;
+}
+
+
+/* ================================================================
+   10. AUTH CARD — the white rounded box holding the form
+   MODIFY: max-width to make the card wider/narrower
+================================================================ */
+.auth-card {
+  position: relative;
+  z-index: 1;
+  background: var(--card-bg);
+  border-radius: var(--r-xl);
+  box-shadow: var(--card-shadow);
+  padding: 48px 44px;
+  width: 100%;
+  max-width: 430px;
+  /* Card entrance animation on page load */
+  animation: cardIn 0.55s cubic-bezier(0.22,1,0.36,1) both;
+}
+
+/* Register card is slightly taller so allow more padding room */
+.auth-card--register {
+  max-width: 440px;
+}
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.card-title {
+  font-family: var(--font-display);
+  font-size: clamp(22px, 3vw, 29px);
+  font-weight: 800;
+  color: var(--text-dark);
+  letter-spacing: -0.5px;
+  margin-bottom: 7px;
+}
+
+.card-sub {
+  font-size: 13.5px;
+  color: var(--text-mid);
+  line-height: 1.65;
+  margin-bottom: 30px;
+  max-width: 320px;
+}
+
+
+/* ================================================================
+   11. FORM FIELDS — input groups, icons, error messages
+================================================================ */
+
+/* Spacing between each field group */
+.field-group {
+  margin-bottom: 16px;
+}
+
+/* Wraps the icon + input (or select) side by side */
+.field-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* Icon inside the left of each field */
+.field-icon {
+  position: absolute;
+  left: 13px;
+  width: 17px;
+  height: 17px;
+  color: var(--text-muted);
+  pointer-events: none;
+  flex-shrink: 0;
+  transition: color 0.2s;
+  z-index: 1;
+}
+
+/* Input box — shared by text, email, password inputs */
+.field-input {
+  width: 100%;
+  padding: 13px 14px 13px 42px;  /* left padding for the icon */
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--text-dark);
+  background: var(--input-bg);
+  border: 1.5px solid var(--input-border);
+  border-radius: var(--r-md);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+  -webkit-appearance: none;
+}
+
+.field-input::placeholder {
+  color: var(--text-muted);
+  font-size: 13.5px;
+}
+
+/* Focus state */
+.field-input:focus {
+  border-color: var(--input-focus);
+  background: #fff;
+  box-shadow: var(--focus-ring);
+}
+
+/* When parent has focus-within, colour the icon too */
+.field-wrap:focus-within .field-icon {
+  color: var(--input-focus);
+}
+
+/* Error state — added by JS when validation fails */
+.field-input.field-invalid {
+  border-color: #ef4444;
+  background: #fff5f5;
+}
+
+/* Error text below the field */
+.field-err {
+  display: block;
+  font-size: 12px;
+  color: #ef4444;
+  font-weight: 500;
+  margin-top: 5px;
+  padding-left: 4px;
+  min-height: 16px;        /* reserve space so layout doesn't jump */
+  opacity: 0;
+  transform: translateY(-4px);
+  transition: opacity 0.2s, transform 0.2s;
+}
+
+/* JS adds .show class to reveal the error */
+.field-err.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Shake animation — injected by auth.js */
+@keyframes shakeField {
+  0%,100% { transform: translateX(0); }
+  18%     { transform: translateX(-7px); }
+  36%     { transform: translateX(7px); }
+  54%     { transform: translateX(-5px); }
+  72%     { transform: translateX(5px); }
+}
+
+.shake {
+  animation: shakeField 0.42s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+
+/* ================================================================
+   12. SELECT DROPDOWN — custom styled gender select
+================================================================ */
+
+/* Wrapper needs relative for the chevron arrow overlay */
+.field-wrap--select {
+  position: relative;
+}
+
+/* The <select> itself — same as .field-input + extra right padding */
+.field-select {
+  padding-right: 40px;    /* room for the custom chevron */
+  cursor: pointer;
+  /* Hide the native browser dropdown arrow */
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+/* Default (unselected) option is greyed out */
+.field-select:invalid,
+.field-select option[value=""] {
+  color: var(--text-muted);
+}
+
+/* Valid selected option */
+.field-select option {
+  color: var(--text-dark);
+}
+
+/* Custom chevron arrow overlaid on right side of select */
+.select-arrow {
+  position: absolute;
+  right: 13px;
+  width: 18px;
+  height: 18px;
+  color: var(--text-muted);
+  pointer-events: none;   /* clicks pass through to the select */
+  z-index: 1;
+}
+
+
+/* ================================================================
+   13. EYE TOGGLE BUTTON — show/hide password
+================================================================ */
+.eye-btn {
+  position: absolute;
+  right: 10px;
+  width: 34px;
+  height: 34px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--r-sm);
+  color: var(--text-muted);
+  transition: color 0.2s, background 0.2s;
+}
+
+.eye-btn:hover {
+  color: var(--text-mid);
+  background: var(--input-border);
+}
+
+.eye-btn svg {
+  width: 16px;
+  height: 16px;
+}
+
+
+/* ================================================================
+   14. PRIMARY BUTTON — SIGN IN / REGISTER
+   MODIFY: Change background gradient to change the button colour.
+================================================================ */
+.btn-primary {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px;
+  margin-top: 8px;
+  /* Gradient from blue to green — matches left panel */
+  background: linear-gradient(135deg, #2563eb 0%, var(--accent) 100%);
+  color: var(--text-white);
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  font-weight: 700;
+  letter-spacing: 1.3px;
+  text-transform: uppercase;
+  border: none;
+  border-radius: var(--r-md);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 6px 22px rgba(37,99,235,0.28);
+  transition: transform 0.22s cubic-bezier(0.22,1,0.36,1),
+              box-shadow 0.22s, filter 0.22s;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(37,99,235,0.34);
+  filter: brightness(1.06);
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+  box-shadow: 0 4px 14px rgba(37,99,235,0.24);
+}
+
+.btn-primary:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Loading spinner inside button — shown while async calls run */
+/* Width starts at 0; JS adds .loading class which sets width to 18px */
+.btn-spin {
+  width: 0;
+  height: 18px;
+  border: 2.5px solid transparent;
+  border-top-color: rgba(255,255,255,0.85);
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: width 0.25s;
+}
+
+.btn-primary.loading .btn-spin {
+  width: 18px;
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+
+/* ================================================================
+   15. SWITCH AUTH — "New user? Register Now" / "Already have an account?"
+================================================================ */
+.switch-auth {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 22px;
+  flex-wrap: wrap;
+}
+
+.switch-text {
+  font-size: 13.5px;
+  color: var(--text-mid);
+}
+
+/* The clickable link — "Register Now" / "Sign In" */
+.switch-link {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--input-focus);
+  position: relative;
+  transition: color 0.2s;
+}
+
+/* Underline slide-in on hover */
+.switch-link::after {
+  content: '';
+  position: absolute;
+  left: 0; bottom: -2px;
+  width: 0; height: 1.5px;
+  background: var(--input-focus);
+  border-radius: 2px;
+  transition: width 0.22s;
+}
+
+.switch-link:hover::after { width: 100%; }
+
+
+/* ================================================================
+   16. STATUS BOX — shown after form submission
+   JS adds .status-ok (green) or .status-err (red) classes.
+================================================================ */
+.status-box {
+  margin-top: 16px;
+  border-radius: var(--r-sm);
+  font-size: 13.5px;
+  font-weight: 600;
+  text-align: center;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.35s ease, padding 0.25s, opacity 0.28s;
+}
+
+.status-box.status-ok {
+  max-height: 72px;
+  padding: 12px 14px;
+  opacity: 1;
+  background: #ecfdf5;
+  color: #065f46;
+  border: 1px solid #a7f3d0;
+}
+
+.status-box.status-err {
+  max-height: 72px;
+  padding: 12px 14px;
+  opacity: 1;
+  background: #fff1f2;
+  color: #9f1239;
+  border: 1px solid #fecdd3;
+}
+
+
+/* ================================================================
+   17. SUCCESS MODAL — popup shown after successful login
+   ─────────────────────────────────────────────────────────────
+   .modal-overlay  — full-screen dark blurred backdrop
+   .modal-box      — the white centered card
+   .modal-open     — JS adds this class to show the modal
+================================================================ */
+
+/* Full-screen backdrop */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  /* Blurred + dimmed background behind the modal */
+  background: rgba(13, 27, 46, 0.55);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  /* Hidden by default */
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+
+/* When JS adds .modal-open → modal becomes visible */
+.modal-overlay.modal-open {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* The white card box inside the overlay */
+.modal-box {
+  background: var(--card-bg);
+  border-radius: var(--r-xl);
+  padding: 44px 40px;
+  max-width: 400px;
+  width: 100%;
+  text-align: center;
+  box-shadow: 0 32px 80px rgba(13,27,46,0.28);
+  /* Scale-up entrance animation */
+  transform: scale(0.88);
+  transition: transform 0.38s cubic-bezier(0.34,1.56,0.64,1);
+}
+
+.modal-overlay.modal-open .modal-box {
+  transform: scale(1);
+}
+
+/* Circular checkmark icon at top of modal */
+.modal-icon {
+  width: 72px;
+  height: 72px;
+  margin: 0 auto 22px;
+}
+
+.modal-icon svg {
+  width: 100%;
+  height: 100%;
+  /* Animate the checkmark drawing in */
+  animation: iconPop 0.55s cubic-bezier(0.34,1.56,0.64,1) 0.1s both;
+}
+
+@keyframes iconPop {
+  from { transform: scale(0.4) rotate(-15deg); opacity: 0; }
+  to   { transform: scale(1) rotate(0deg);     opacity: 1; }
+}
+
+.modal-title {
+  font-family: var(--font-display);
+  font-size: clamp(18px, 2.5vw, 22px);
+  font-weight: 800;
+  color: var(--text-dark);
+  letter-spacing: -0.3px;
+  margin-bottom: 10px;
+}
+
+.modal-msg {
+  font-size: 14px;
+  color: var(--text-mid);
+  line-height: 1.65;
+  margin-bottom: 28px;
+}
+
+/* "Continue" button inside the modal — reuses .btn-primary */
+.modal-ok {
+  max-width: 200px;
+  margin: 0 auto;
+}
+
+
+/* ================================================================
+   18. RESPONSIVE — TABLET (max 960px)
+   Panels stack vertically. Left becomes a top banner.
+================================================================ */
+@media (max-width: 960px) {
+  .page-wrapper { flex-direction: column; }
+
+  .left-panel {
+    flex: none;
+    padding: 44px 28px 38px;
+    min-height: auto;
+  }
+
+  .illustration { max-width: 210px; margin-bottom: 18px; }
+  .panel-title  { font-size: 19px; }
+  .panel-tagline{ font-size: 13px; }
+  .panel-dots   { margin-top: 18px; }
+
+  .right-panel  { flex: none; padding: 44px 24px 56px; }
+
+  .auth-card,
+  .auth-card--register {
+    max-width: 500px;
+    padding: 40px 32px;
+  }
+}
+
+
+/* ================================================================
+   19. RESPONSIVE — MOBILE (max 560px)
+   Further tightening for small phones.
+================================================================ */
+@media (max-width: 560px) {
+  .left-panel { padding: 32px 18px 26px; }
+  .illustration{ max-width: 170px; margin-bottom: 14px; }
+  .panel-tagline{ max-width: 220px; }
+
+  .right-panel { padding: 28px 14px 44px; }
+
+  .auth-card,
+  .auth-card--register {
+    padding: 30px 20px;
+    border-radius: var(--r-lg);
+    box-shadow: 0 12px 40px rgba(13,27,46,0.09);
+  }
+
+  .card-title  { font-size: 21px; }
+  .card-sub    { font-size: 13px; margin-bottom: 22px; }
+
+  /* Larger tap targets for mobile */
+  .field-input { font-size: 15px; padding: 13px 14px 13px 40px; }
+  .btn-primary { padding: 15px; font-size: 13px; }
+
+  .dot-grid { display: none; }    /* hide dots on very small screens */
+
+  /* Adjust modal padding */
+  .modal-box { padding: 32px 22px; }
+}
